@@ -2,8 +2,8 @@ var form = document.getElementById('form')
 form.addEventListener('submit',function(event){
     event.preventDefault()
     var input = document.getElementById('passage').value
-    console.log(input)
-    console.log(input.length)
+    // console.log(input)
+    // console.log(input.length)
     if(input.trim() === ''){
         document.getElementById('output').innerText = "Submit Text"
     }
