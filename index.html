@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html>
-<body>
+    <!DOCTYPE html>
+    <head><link rel = "stylesheet" href = "style.css"></head>
+    <html>
+    <div class="head"><h1>Connotate.AI</h1></div>
+    <div class="i"><h2>To see a connotative analysis of your text, just enter your passage into the box on the top and click Analyze. The analysis will appear in the box on the bottom!</h2></div>
+    <body>
+        <form id="form">
+            <input type="text" id="passage" onfocus="rem()" onblur="back()"><br>
+            <div class = "boton">
+                <button type="submit" id = "btn1">Analyze!</button>
+                <button type="button" id = "btn2" onclick="resetForm()">Reset</button>
+            </div>
+        </form>
+        <p id = "output">Press Submit</p>
+        <p id="holder">Enter Passage</p>
 
-    <form id="form">
-        <input type="text" id="passage" placeholder="Enter passage"><br>
-        <button type="submit" id = "btn1">Submit</button>
-    </form>
-    <p class = "output" id = "output"></p>
-</body>
-<script src = "index.js"></script>
-</html>
+        <script src = "index.js"></script>
+    </body>
+
+    </html>
