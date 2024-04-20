@@ -13,10 +13,29 @@ form.addEventListener('submit',function(event){
         document.getElementById("holder").style.display = "block"
     }
     else{
-        document.getElementById('output').innerText = input
+         query({"inputs": input}).then((response) => {document.getElementById('output').innerText = (JSON.stringify(response[0][0]["label"])).substring(1,JSON.stringify(response[0][0]["label"]).length-1)});
     }
 
 })
+
+async function query(data) {
+	const response = await fetch(
+		"https://api-inference.huggingface.co/models/namebobb/my_awesome_model",
+		{
+			headers: { Authorization: "Bearer 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" },
+			method: "POST",
+			body: JSON.stringify(data),
+		}
+	);
+	const result = await response.json();
+	return result;
+}
+
+// query({"inputs": "I like you. I love you"}).then((response) => {
+// 	console.log(JSON.stringify(response[0][0]["label"]));
+// });
+
+
 function resetForm() {
     document.getElementById("passage").value = ""
     document.getElementById("output").innerText = "Submit Text"
