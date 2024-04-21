@@ -13,14 +13,34 @@ form.addEventListener('submit',function(event){
         document.getElementById("holder").style.display = "block"
     }
     else{
-         query({"inputs": input}).then((response) => {document.getElementById('output').innerText = (JSON.stringify(response[0][0]["label"])).substring(1,JSON.stringify(response[0][0]["label"]).length-1)});
+        var x= [];
+        var c = 0;
+        var z = 1;
+        var out = "";
+        query({"inputs": input}).then((response) => {
+            c += response[0][0]["score"];
+            x.push(response[0][0]["label"]);
+            console.log(response);
+            while(c<=.8 && z<=response[0].length&&x.length<3){
+                if(response[0][z]["label"]!='Neutral'){
+                    x.push(response[0][z]["label"]);
+                    c+=response[0][z]["score"];
+                }
+                z++;
+            }
+            for(var b =0;b<x.length;b++){
+                out += x[b] + ", ";
+                console.log(x);
+            }
+            out = out.substring(0,out.length-2);
+            document.getElementById('output').innerText = out;
+        });
     }
-
 })
 
 async function query(data) {
 	const response = await fetch(
-		"https://api-inference.huggingface.co/models/namebobb/my_awesome_model",
+		"https://api-inference.huggingface.co/models/namebobb/anus-wanus-panus-ranus",
 		{
 			headers: { Authorization: "Bearer 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" },
 			method: "POST",
@@ -30,10 +50,6 @@ async function query(data) {
 	const result = await response.json();
 	return result;
 }
-
-// query({"inputs": "I like you. I love you"}).then((response) => {
-// 	console.log(JSON.stringify(response[0][0]["label"]));
-// });
 
 
 function resetForm() {
